@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f1ebe3" />
+  <title>Wedding XR — Realistic Hall</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <main class="scene-shell">
+    <canvas id="weddingCanvas" aria-label="3D 웨딩홀 시뮬레이션"></canvas>
+
+    <div class="top-hud">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <div>
+          <strong>Wedding XR</strong>
+          <small>My Wedding Preview</small>
+        </div>
+      </div>
+
+      <div class="hud-actions">
+        <span id="modeBadge" class="hud-chip">👰 버진로드 체험</span>
+        <button id="resetView" class="glass-button" type="button">시점 초기화</button>
+      </div>
+    </div>
+
+    <aside id="floatingPanel" class="floating-panel" aria-label="웨딩홀 편집 메뉴">
+      <div class="panel-head">
+        <div>
+          <p>LIVE EDIT</p>
+          <strong>내 웨딩홀 꾸미기</strong>
+        </div>
+        <button id="collapsePanel" class="icon-button" type="button" aria-label="메뉴 접기">−</button>
+      </div>
+
+      <div id="panelBody" class="panel-body">
+        <div class="reference-row">
+          <img src="./assets/reference.png" alt="사용자가 제공한 웨딩홀 레퍼런스 이미지" />
+          <div>
+            <small>REFERENCE MOOD</small>
+            <strong>크림 아치 · 화이트 플라워</strong>
+            <span>레퍼런스 기반 프로토타입</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="hallStyle">홀 스타일</label>
+          <select id="hallStyle">
+            <option value="chapel">클래식 크림 채플</option>
+            <option value="ballroom">화이트 샹들리에 홀</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="seatingType">하객석</label>
+          <select id="seatingType">
+            <option value="chairs">아이보리 원형 의자</option>
+            <option value="pews">우드 벤치</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="aisleType">버진로드</label>
+          <select id="aisleType">
+            <option value="glossy">유광 아이보리</option>
+            <option value="wood">웜 우드</option>
+            <option value="white">화이트 러너</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="field-title">
+            <label for="flowerAmount">플라워 볼륨</label>
+            <strong id="flowerAmountValue">88%</strong>
+          </div>
+          <input id="flowerAmount" type="range" min="35" max="100" value="88" />
+        </div>
+
+        <div class="field">
+          <div class="field-title">
+            <label for="lightLevel">조명 밝기</label>
+            <strong id="lightLevelValue">78%</strong>
+          </div>
+          <input id="lightLevel" type="range" min="35" max="100" value="78" />
+        </div>
+
+        <div class="field">
+          <label for="flowerTone">플라워 톤</label>
+          <select id="flowerTone">
+            <option value="white">화이트 & 그린</option>
+            <option value="ivory">아이보리 & 샴페인</option>
+            <option value="blush">화이트 & 블러시</option>
+          </select>
+        </div>
+
+        <div class="quick-views">
+          <button data-view="entrance" type="button">입구</button>
+          <button data-view="middle" type="button">중앙</button>
+          <button data-view="altar" type="button">단상</button>
+          <button data-view="guest" type="button">하객석</button>
+        </div>
+
+        <div class="panel-actions">
+          <button id="walkMode" class="primary-action" type="button">버진로드 걸어보기</button>
+          <div id="vrButtonHost"></div>
+        </div>
+
+        <p id="xrStatus" class="status-text" aria-live="polite">
+          Galaxy XR에서는 Chrome + HTTPS 주소로 접속해 VR 모드를 실행하세요.
+        </p>
+      </div>
+    </aside>
+
+    <div class="walk-help">
+      <strong>둘러보기 / 이동</strong>
+      <span>드래그: 시선 이동</span>
+      <span>W/S 또는 ↑/↓: 걷기</span>
+      <span>A/D 또는 ←/→: 방향 전환</span>
+    </div>
+
+    <div class="mobile-pad" aria-label="모바일 이동 컨트롤">
+      <button id="turnLeft" type="button">↶</button>
+      <button id="moveForward" class="pad-up" type="button">↑</button>
+      <button id="turnRight" type="button">↷</button>
+      <button id="moveBackward" class="pad-down" type="button">↓</button>
+    </div>
+
+    <div id="crosshair" class="crosshair" aria-hidden="true"></div>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

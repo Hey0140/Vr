@@ -1,115 +1,80 @@
-# 3D 360° Wedding Simulator Prototype
+# Wedding XR Realistic v3
 
-웹 기반 3D 웨딩 시뮬레이션 프로토타입입니다.
+사용자 제공 레퍼런스 이미지를 참고하여 만든 **웹 기반 3D 웨딩홀 + 버진로드 체험 + WebXR** 프로토타입입니다.
 
-## 현재 구현 기능
+## 주요 변경점
 
-- 3D 웨딩홀
-- 마우스 / 터치 360° 회전
-- 입장 / 하객 / 무대 / 전체 시점 전환
-- 웨딩 스타일 변경
-- 꽃 장식 밀도 변경
-- 조명 밝기 변경
-- 예상 하객 수에 따른 좌석 변화
-- 예상 연출 비용 예시
-- XR 지원 여부 확인
+- 화면 전체를 3D 홀로 사용
+- 왼쪽에 **플로팅 편집 패널**
+- 패널을 접고 펼칠 수 있음
+- 돌아다니면서 즉시 옵션 수정 가능
+- 크림톤 아치형 천장
+- 반복되는 간접조명 리브
+- 클래식 기둥
+- 샹들리에
+- 유광 아이보리 버진로드
+- 아이보리 원형 의자 / 우드 벤치 전환
+- 풍성한 화이트 플라워
+- 꽃 볼륨, 조명 밝기, 플라워 톤 수정
+- 1인칭 버진로드 이동
+- Galaxy XR WebXR 진입
+- XR 텔레포트 포인트
+- 컨트롤러 stick 이동 지원
 
-> 현재 버전은 **WebXR 지원 여부 확인까지 구현**되어 있으며,
-> 실제 VR 헤드셋의 immersive VR 세션 진입 기능은 아직 포함하지 않았습니다.
+## 조작
 
----
+### PC
+- 마우스 드래그: 시선 이동
+- W/S 또는 ↑/↓: 전진 / 후진
+- A/D 또는 ←/→: 회전
 
-## 실행 방법
+### 모바일
+오른쪽 아래 이동 패드 사용
 
-이 프로젝트는 빌드 과정 없이 실행 가능한 정적 웹 프로젝트입니다.
+### Galaxy XR
+1. GitHub에 업로드
+2. Vercel/Netlify 등 HTTPS로 배포
+3. Galaxy XR의 Chrome에서 배포 주소 접속
+4. `Galaxy XR로 입장` 클릭
+5. 버진로드의 원형 포인트를 손/컨트롤러로 선택해 이동
 
-### 방법 1. VS Code Live Server
+## 실행
 
-VS Code에서 폴더를 연 뒤 `index.html`을 Live Server로 실행합니다.
-
-### 방법 2. Python 로컬 서버
+파일 더블클릭 대신 HTTP 서버를 사용하세요.
 
 ```bash
 python -m http.server 5173
 ```
 
-이후 브라우저에서:
+그 다음:
 
 ```text
 http://localhost:5173
 ```
 
-접속합니다.
+## Vercel
 
----
-
-## GitHub에 올리기
-
-```bash
-git init
-git add .
-git commit -m "Initial 3D wedding simulator"
-git branch -M main
-git remote add origin YOUR_GITHUB_REPOSITORY_URL
-git push -u origin main
-```
-
----
-
-## Vercel 배포
-
-1. GitHub에 저장소 업로드
-2. Vercel 로그인
-3. `Add New Project`
-4. GitHub 저장소 선택
-5. Framework Preset: `Other`
-6. Build Command: 비워둠
-7. Output Directory: `.`
-8. Deploy
-
-정적 HTML 프로젝트이므로 별도 빌드는 필요하지 않습니다.
-
----
-
-## Netlify 배포
-
-GitHub 저장소를 연결한 후 Publish directory를 프로젝트 루트(`.`)로 설정하면 됩니다.
-
----
-
-## 실제 VR 테스트를 위한 다음 단계
-
-현재 코드에는 XR 지원 체크만 존재합니다.
-
-실제 Meta Quest 등에서 VR 모드로 진입하려면 아래가 추가되어야 합니다.
-
-- `renderer.xr.enabled = true`
-- Three.js `VRButton` 또는 `XRButton`
-- `renderer.setAnimationLoop()`
-- VR 컨트롤러 입력
-- 이동 / 텔레포트 인터랙션
-
-WebXR은 HTTPS 환경에서 테스트하는 것을 권장하므로,
-Vercel/Netlify 등의 HTTPS 배포 후 Quest Browser에서 접속하는 구조가 편리합니다.
-
----
+- Framework Preset: Other
+- Build Command: 비워두기
+- Output Directory: `.`
+- Deploy
 
 ## 파일 구조
 
 ```text
-wedding-3d-prototype/
+wedding-xr-realistic-v3/
 ├── index.html
 ├── style.css
 ├── app.js
 ├── README.md
-└── .gitignore
+├── .gitignore
+└── assets/
+    └── reference.png
 ```
 
-## 기술
+## 한계 / 다음 단계
 
-- HTML
-- CSS
-- JavaScript
-- Three.js
-- OrbitControls
-- WebXR API 지원 여부 체크
+현재 홀은 Three.js 기본 geometry로 만든 고급 프로토타입입니다.
+**실제 특정 웨딩홀과 사진 수준의 1:1 현실감을 얻으려면 실제 GLB/GLTF 3D 모델 또는 LiDAR/photogrammetry 데이터가 필요합니다.**
+
+그 모델이 준비되면 현재 UI, 이동, WebXR 로직은 그대로 유지하고 홀 geometry만 교체할 수 있습니다.
