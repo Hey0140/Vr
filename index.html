@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D 360° 웨딩 시뮬레이터</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">AI WEDDING EXPERIENCE</p>
+        <h1>3D 360° 웨딩 시뮬레이터</h1>
+        <p class="subtitle">고르기 전에, 내 결혼식에 먼저 들어가 봅니다.</p>
+      </div>
+    </header>
+
+    <section class="layout">
+      <aside class="panel controls-panel">
+        <div class="section-block">
+          <p class="section-label">AI 취향 프로필</p>
+          <div class="chips">
+            <span class="chip">👑 여왕님 68%</span>
+            <span class="chip">#클래식</span>
+            <span class="chip">#화이트플라워</span>
+            <span class="chip">#실크</span>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <label for="styleSelect">웨딩 스타일</label>
+          <select id="styleSelect">
+            <option value="classic">클래식 호텔</option>
+            <option value="romantic">로맨틱 플라워</option>
+            <option value="modern">모던 미니멀</option>
+          </select>
+        </div>
+
+        <div class="section-block">
+          <div class="range-label">
+            <label for="flowerRange">꽃 장식</label>
+            <strong id="flowerValue">70%</strong>
+          </div>
+          <input id="flowerRange" type="range" min="10" max="100" value="70" />
+        </div>
+
+        <div class="section-block">
+          <div class="range-label">
+            <label for="lightRange">조명 밝기</label>
+            <strong id="lightValue">72%</strong>
+          </div>
+          <input id="lightRange" type="range" min="20" max="100" value="72" />
+        </div>
+
+        <div class="section-block">
+          <label for="guestSelect">예상 하객</label>
+          <select id="guestSelect">
+            <option value="80">80명</option>
+            <option value="120" selected>120명</option>
+            <option value="160">160명</option>
+            <option value="200">200명</option>
+          </select>
+        </div>
+
+        <div class="section-block">
+          <p class="section-label">시점</p>
+          <div class="button-grid">
+            <button id="viewEntrance" type="button">입장 시점</button>
+            <button id="viewGuest" type="button">하객 시점</button>
+            <button id="viewStage" type="button">신랑·신부</button>
+            <button id="viewTop" type="button">전체 보기</button>
+          </div>
+        </div>
+
+        <div class="metric">
+          <span>예상 연출 비용</span>
+          <strong id="costValue">약 520만원</strong>
+          <small>꽃·좌석·조명 기준 예시</small>
+        </div>
+
+        <button id="xrCheck" class="xr-button" type="button">🥽 XR 지원 확인</button>
+        <p id="xrStatus" class="helper" aria-live="polite">
+          지원 환경에서는 WebXR 모드로 확장할 수 있어요.
+        </p>
+      </aside>
+
+      <section class="viewer-column">
+        <div class="viewer-wrap">
+          <canvas id="weddingCanvas" aria-label="360도 3D 웨딩홀 시뮬레이션"></canvas>
+          <div class="viewer-hint">마우스 드래그 · 터치로 360° 회전</div>
+        </div>
+
+        <div class="metrics-row">
+          <div class="metric-card">
+            <span>취향 적합도</span>
+            <strong>94%</strong>
+          </div>
+          <div class="metric-card">
+            <span>공간 적합도</span>
+            <strong id="spaceScore">91%</strong>
+          </div>
+          <div class="metric-card">
+            <span>현재 컨셉</span>
+            <strong id="conceptLabel">클래식 호텔</strong>
+          </div>
+        </div>
+
+        <div class="callout">
+          실제 서비스에서는 제휴 웨딩홀의 3D/360° 데이터와 사용자의 취향 분석 결과를 연결하여
+          웨딩홀·플라워·조명·좌석 구성을 실시간으로 비교하는 형태로 확장할 수 있습니다.
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
